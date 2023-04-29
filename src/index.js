@@ -1,13 +1,15 @@
 require('dotenv').config()
 
-const app = require('express')()
-const port = 1406
-
+const express = require('express')
 require('./config/database')
 
-app.get('/', (req, res) => {
-    res.send('invicto-app')
-})
+const app = express()
+const port = 1406
+
+const userController = require('./controllers/user')
+
+app.use(express.json())
+app.use('/user', userController)
 
 app.listen(port, () => {
     console.log(`Servidor iniciado em http://localhost:${port}`)
