@@ -21,4 +21,13 @@ router.patch('/:userId/rename', async (req, res) => {
     }
 })
 
+router.patch('/:userId/password', async (req, res) => {
+    try {
+        const user = await userService.changeUserPassword(req.params.userId, req.body.password)
+        res.status(201).send(user)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
 module.exports = router
