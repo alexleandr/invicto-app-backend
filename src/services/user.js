@@ -13,4 +13,16 @@ async function registerUser({ nickname, password }) {
   return createdUser
 }
 
-module.exports = { registerUser }
+async function renameUser(userId, newNickname) {
+  const user = await User.findById(userId)
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  user.nickname = newNickname
+  await user.save()
+
+  return user
+}
+
+module.exports = { registerUser, renameUser }
