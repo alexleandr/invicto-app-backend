@@ -25,4 +25,18 @@ async function renameUser(userId, newNickname) {
   return user
 }
 
-module.exports = { registerUser, renameUser }
+async function changeUserPassword(userId, newPassword) {
+  const user = await User.findById(userId)
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  const hashedNewPassword = await bcrypt.hash(newPassword, 10)
+
+  user.password = hashedNewPassword
+  await user.save()
+
+  return user
+}
+
+module.exports = { registerUser, renameUser, changeUserPassword }
