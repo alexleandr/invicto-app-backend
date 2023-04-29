@@ -1,7 +1,7 @@
 require('dotenv').config()
 
-const app = require('express')(),
-    port = 1406
+const app = require('express')()
+const port = 1406
 
 require('./config/database')
 
