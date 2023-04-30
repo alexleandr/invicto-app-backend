@@ -39,4 +39,16 @@ async function changeUserPassword(userId, newPassword) {
   return user
 }
 
-module.exports = { registerUser, renameUser, changeUserPassword }
+async function addViceToUser(userId, newVice) {
+  const user = await User.findById(userId)
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  user.vices.push(newVice)
+
+  const updatedUser = await user.save()
+  return updatedUser
+}
+
+module.exports = { registerUser, renameUser, changeUserPassword, addViceToUser }
