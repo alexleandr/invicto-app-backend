@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { ObjectId } = require('mongodb')
 
 const UserSchema = new mongoose.Schema({
     nickname: {
@@ -12,7 +13,10 @@ const UserSchema = new mongoose.Schema({
         maxlength: 128 
     },
     vices: [{
-        _id: mongoose.Schema.Types.ObjectId,
+        _id: {
+            type: mongoose.Schema.Types.ObjectId,
+            default: () => new ObjectId()
+        },
         title: { 
             type: String, 
             required: true, 
