@@ -51,4 +51,23 @@ async function addViceToUser(userId, newVice) {
   return updatedUser
 }
 
-module.exports = { registerUser, renameUser, changeUserPassword, addViceToUser }
+async function updateVice(userId, viceId, updates) {
+  const user = await User.findById(userId)
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  const vice = user.vices.find(v => v._id.toString() === viceId)
+  if (!vice) {
+    throw new Error('Vice not found')
+  }
+
+  Object.keys(updates).forEach(key => {
+    vice[key] = updates[key]
+  })
+  await user.save()
+
+  return user
+}
+
+module.exports = { registerUser, renameUser, changeUserPassword, addViceToUser, updateVice }
