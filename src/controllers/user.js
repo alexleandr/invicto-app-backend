@@ -48,4 +48,13 @@ router.put('/:userId/vices/:viceId/update', async (req, res) => {
     }
 })
 
+router.delete('/:userId/vices/:viceId/delete', async (req, res) => {
+    try {
+        const user = await userService.deleteVice(req.params.userId, req.params.viceId)
+        res.status(201).send(user)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+})
+
 module.exports = router

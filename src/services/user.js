@@ -46,9 +46,9 @@ async function addViceToUser(userId, newVice) {
   }
 
   user.vices.push(newVice)
+  await user.save()
 
-  const updatedUser = await user.save()
-  return updatedUser
+  return user
 }
 
 async function updateVice(userId, viceId, updates) {
@@ -70,4 +70,21 @@ async function updateVice(userId, viceId, updates) {
   return user
 }
 
-module.exports = { registerUser, renameUser, changeUserPassword, addViceToUser, updateVice }
+async function deleteVice(userId, viceId) {
+  const user = await User.findById(userId)
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  const viceIndex = user.vices.findIndex(v => v._id.toString() === viceId)
+  if (viceIndex === -1) {
+    throw new Error('Vice not found')
+  }
+
+  user.vices.splice(viceIndex, 1)
+  await user.save()
+
+  return user
+}
+
+module.exports = { registerUser, renameUser, changeUserPassword, addViceToUser, updateVice, deleteVice }
