@@ -13,6 +13,15 @@ async function registerUser({ nickname, password }) {
   return createdUser
 }
 
+async function getUserData(userId) {
+  const user = await User.findById(userId)
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  return user
+}
+
 async function renameUser(userId, newNickname) {
   const user = await User.findById(userId)
   if (!user) {
@@ -51,6 +60,15 @@ async function addViceToUser(userId, newVice) {
   return user
 }
 
+async function getUserVices(userId) {
+  const user = await User.findById(userId)
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  return user.vices
+}
+
 async function updateVice(userId, viceId, updates) {
   const user = await User.findById(userId)
   if (!user) {
@@ -87,4 +105,4 @@ async function deleteVice(userId, viceId) {
   return user
 }
 
-module.exports = { registerUser, renameUser, changeUserPassword, addViceToUser, updateVice, deleteVice }
+module.exports = { registerUser, renameUser, changeUserPassword, addViceToUser, updateVice, deleteVice, getUserData, getUserVices }
