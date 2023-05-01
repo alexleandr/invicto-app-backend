@@ -39,4 +39,13 @@ router.post('/:userId/vices', async (req, res) => {
     }
 })
 
+router.put('/:userId/vices/:viceId/update', async (req, res) => {
+    try {
+        const user = await userService.updateVice(req.params.userId, req.params.viceId, req.body)
+        res.status(201).send(user)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+})
+
 module.exports = router
