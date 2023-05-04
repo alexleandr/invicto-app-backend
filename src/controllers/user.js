@@ -25,16 +25,6 @@ router.get('/:userId', async (req, res) => {
     }
 })
 
-// Renomear usuário
-router.patch('/:userId/rename', async (req, res) => {
-    try {
-        const user = await userService.renameUser(req.params.userId, req.body.nickname)
-        res.status(200).send(user)
-    } catch (error) {
-        res.status(400).send(error)
-    }
-})
-
 // Mudar senha do usuário
 router.patch('/:userId/password', async (req, res) => {
     try {

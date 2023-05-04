@@ -2,6 +2,11 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 
 async function registerUser({ nickname, password }) {
+  const existingUser = await User.findOne({ nickname })
+  if (existingUser) {
+    throw new Error('Nickname already exists')
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10)
 
   const newUser = new User({
@@ -18,18 +23,6 @@ async function getUserData(userId) {
   if (!user) {
     throw new Error('User not found')
   }
-
-  return user
-}
-
-async function renameUser(userId, newNickname) {
-  const user = await User.findById(userId)
-  if (!user) {
-    throw new Error('User not found')
-  }
-
-  user.nickname = newNickname
-  await user.save()
 
   return user
 }
@@ -105,4 +98,4 @@ async function deleteVice(userId, viceId) {
   return user
 }
 
-module.exports = { registerUser, renameUser, changeUserPassword, addViceToUser, updateVice, deleteVice, getUserData, getUserVices }
+module.exports = { registerUser, changeUserPassword, addViceToUser, updateVice, deleteVice, getUserData, getUserVices }
