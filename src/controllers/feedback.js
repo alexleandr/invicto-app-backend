@@ -1,12 +1,13 @@
 const { Router } = require('express')
 const feedbackService = require('../services/feedback')
+const { verifyToken } = require('../middlewares/verifyToken')
 
 const router = Router()
 
 // ROTAS FEEDBACKS:
 
 // Ler todos os feedbacks
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
     try {
         const feedbacks = await feedbackService.getFeedbacks()
         res.status(200).send(feedbacks)

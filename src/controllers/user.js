@@ -1,12 +1,13 @@
 const { Router } = require('express')
 const userService = require('../services/user')
+const { verifyToken } = require('../middlewares/verifyToken')
 
 const router = Router()
 
 // ROTAS USUÁRIOS:
 
 // Registrar usuário
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const user = await userService.registerUser(req.body)
         res.status(201).send(user)
@@ -16,7 +17,7 @@ router.post('/register', async (req, res) => {
 })
 
 // Ler dados do usuário
-router.get('/:userId', async (req, res) => {
+router.get('/:userId', verifyToken, async (req, res) => {
     try {
         const user = await userService.getUserData(req.params.userId)
         res.status(200).send(user)
@@ -26,7 +27,7 @@ router.get('/:userId', async (req, res) => {
 })
 
 // Mudar senha do usuário
-router.patch('/:userId/password', async (req, res) => {
+router.patch('/:userId/password', verifyToken, async (req, res) => {
     try {
         const user = await userService.changeUserPassword(req.params.userId, req.body.password)
         res.status(200).send(user)
@@ -38,7 +39,7 @@ router.patch('/:userId/password', async (req, res) => {
 // ROTAS VÍCIOS:
 
 // Registrar vício
-router.post('/:userId/vices', async (req, res) => {
+router.post('/:userId/vices', verifyToken, async (req, res) => {
     try {
         const user = await userService.addViceToUser(req.params.userId, req.body)
         res.status(201).send(user)
@@ -48,7 +49,7 @@ router.post('/:userId/vices', async (req, res) => {
 })
 
 // Ler vícios de um usuário
-router.get('/:userId/vices', async (req, res) => {
+router.get('/:userId/vices', verifyToken, async (req, res) => {
     try {
         const user = await userService.getUserVices(req.params.userId)
         res.status(200).send(user)
@@ -58,7 +59,7 @@ router.get('/:userId/vices', async (req, res) => {
 })
 
 // Editar vício
-router.put('/:userId/vices/:viceId', async (req, res) => {
+router.put('/:userId/vices/:viceId', verifyToken, async (req, res) => {
     try {
         const user = await userService.updateVice(req.params.userId, req.params.viceId, req.body)
         res.status(200).send(user)
@@ -68,7 +69,7 @@ router.put('/:userId/vices/:viceId', async (req, res) => {
 })
 
 // Deletar vício
-router.delete('/:userId/vices/:viceId', async (req, res) => {
+router.delete('/:userId/vices/:viceId', verifyToken, async (req, res) => {
     try {
         const user = await userService.deleteVice(req.params.userId, req.params.viceId)
         res.status(200).send(user)
