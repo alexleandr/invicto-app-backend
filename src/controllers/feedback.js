@@ -4,7 +4,7 @@ const { verifyToken } = require('../middlewares/verifyToken')
 
 const router = Router()
 
-// ROTAS FEEDBACKS:
+// ROTA FEEDBACK:
 
 // Ler todos os feedbacks
 router.get('/', verifyToken, async (req, res) => {

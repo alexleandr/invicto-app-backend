@@ -4,7 +4,7 @@ const User = require('../models/user')
 
 const secret = process.env.JWT_SECRET
 
-// SERVICES AUTENTICAÇÃO:
+// SERVICE AUTENTICAÇÃO:
 
 // Gerar token
 function generateToken(user) {

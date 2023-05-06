@@ -3,7 +3,7 @@ const authService = require('../services/auth')
 
 const router = Router()
 
-// ROTAS AUTENTICAÇÃO:
+// ROTA AUTENTICAÇÃO:
 
 // Login usuário
 router.post('/login', async (req, res) => {
