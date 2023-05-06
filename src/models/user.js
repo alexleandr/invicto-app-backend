@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const { ObjectId } = require('mongodb')
 
+// MODEL USUÁRIO:
+
 const UserSchema = new mongoose.Schema({
     nickname: {
         type: String,

@@ -4,7 +4,7 @@ const { verifyToken } = require('../middlewares/verifyToken')
 
 const router = Router()
 
-// ROTAS USUÁRIOS:
+// ROTA USUÁRIO:
 
 // Registrar usuário
 router.post('/', async (req, res) => {
@@ -36,7 +36,7 @@ router.patch('/:userId/password', verifyToken, async (req, res) => {
     }
 })
 
-// ROTAS VÍCIOS:
+// ROTA VÍCIO:
 
 // Registrar vício
 router.post('/:userId/vices', verifyToken, async (req, res) => {

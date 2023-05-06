@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+// MODEL DEPOIMENTO:
+
 const FeedbackSchema = new mongoose.Schema({
     author: {
         type: String,

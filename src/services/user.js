@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 
+// SERVICE USUÁRIO:
+
+// Registrar usuário
 async function registerUser({ nickname, password }) {
   const existingUser = await User.findOne({ nickname })
   if (existingUser) {
@@ -18,6 +21,7 @@ async function registerUser({ nickname, password }) {
   return createdUser
 }
 
+// Ler dados do usuário
 async function getUserData(userId) {
   const user = await User.findById(userId)
   if (!user) {
@@ -27,6 +31,7 @@ async function getUserData(userId) {
   return user
 }
 
+// Mudar senha do usuário
 async function changeUserPassword(userId, newPassword) {
   const user = await User.findById(userId)
   if (!user) {
@@ -41,6 +46,9 @@ async function changeUserPassword(userId, newPassword) {
   return user
 }
 
+// SERVICE VÍCIO:
+
+// Registrar vício
 async function addViceToUser(userId, newVice) {
   const user = await User.findById(userId)
   if (!user) {
@@ -53,6 +61,7 @@ async function addViceToUser(userId, newVice) {
   return user
 }
 
+// Ler vícios de um usuário
 async function getUserVices(userId) {
   const user = await User.findById(userId)
   if (!user) {
@@ -62,6 +71,7 @@ async function getUserVices(userId) {
   return user.vices
 }
 
+// Editar vício
 async function updateVice(userId, viceId, updates) {
   const user = await User.findById(userId)
   if (!user) {
@@ -81,6 +91,7 @@ async function updateVice(userId, viceId, updates) {
   return user
 }
 
+// Deletar vício
 async function deleteVice(userId, viceId) {
   const user = await User.findById(userId)
   if (!user) {
