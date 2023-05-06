@@ -6,7 +6,7 @@ const router = Router()
 // ROTAS USUÁRIOS:
 
 // Registrar usuário
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         const user = await userService.registerUser(req.body)
         res.status(201).send(user)
