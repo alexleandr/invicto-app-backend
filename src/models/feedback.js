@@ -13,7 +13,7 @@ const FeedbackSchema = new mongoose.Schema({
         required: true, 
         maxlength: 16
     },
-    user_feedback: { 
+    message: { 
         type: String, 
         required: true, 
         maxlength: 228
