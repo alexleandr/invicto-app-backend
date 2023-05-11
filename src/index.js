@@ -4,7 +4,7 @@ const express = require('express')
 require('./config/database')
 
 const app = express()
-const port = 1406
+const port = process.env.PORT ?? 1406
 
 const authController = require('./controllers/auth')
 const userController = require('./controllers/user')
