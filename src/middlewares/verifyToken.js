@@ -1,10 +1,11 @@
 const jwt = require('jsonwebtoken')
-const secret = process.env.JWT_SECRET
+const secret = process.env.JWT_SECRET ?? ''
 
 // MIDDLEWARE VERIFICAR TOKEN:
 
 function verifyToken(req, res, next) {
-  const token = req.headers['x-access-token']
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
 
   try {
     const decoded = jwt.verify(token, secret)
