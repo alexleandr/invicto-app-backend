@@ -1,81 +1,77 @@
-const { Router } = require('express')
 const userService = require('../services/user')
-const { verifyToken } = require('../middlewares/verifyToken')
 
-const router = Router()
-
-// ROTA USUÁRIO:
+// CONTROLLER USUÁRIO:
 
 // Registrar usuário
-router.post('/', async (req, res) => {
+async function registerUser(req, res) {
     try {
         const user = await userService.registerUser(req.body)
         res.status(201).send(user)
     } catch (error) {
         res.status(400).send(error)
     }
-})
+}
 
 // Ler dados do usuário
-router.get('/:userId', verifyToken, async (req, res) => {
+async function getUserData(req, res) {
     try {
         const user = await userService.getUserData(req.params.userId)
         res.status(200).send(user)
     } catch (error) {
         res.status(400).send(error)
     }
-})
+}
 
 // Mudar senha do usuário
-router.patch('/:userId/password', verifyToken, async (req, res) => {
+async function changeUserPassword(req, res) {
     try {
         const user = await userService.changeUserPassword(req.params.userId, req.body.password)
         res.status(200).send(user)
     } catch (error) {
         res.status(400).send(error)
     }
-})
+}
 
 // ROTA VÍCIO:
 
 // Registrar vício
-router.post('/:userId/vices', verifyToken, async (req, res) => {
+async function addViceToUser(req, res) {
     try {
         const user = await userService.addViceToUser(req.params.userId, req.body)
         res.status(201).send(user)
     } catch (error) {
         res.status(400).send(error)
     }
-})
+}
 
 // Ler vícios de um usuário
-router.get('/:userId/vices', verifyToken, async (req, res) => {
+async function getUserVices(req, res) {
     try {
         const user = await userService.getUserVices(req.params.userId)
         res.status(200).send(user)
     } catch (error) {
         res.status(400).send(error)
     }
-})
+}
 
 // Editar vício
-router.put('/:userId/vices/:viceId', verifyToken, async (req, res) => {
+async function updateVice(req, res) {
     try {
         const user = await userService.updateVice(req.params.userId, req.params.viceId, req.body)
         res.status(200).send(user)
     } catch (error) {
         res.status(400).send(error)
     }
-})
+}
 
 // Deletar vício
-router.delete('/:userId/vices/:viceId', verifyToken, async (req, res) => {
+async function deleteVice(req, res) {
     try {
         const user = await userService.deleteVice(req.params.userId, req.params.viceId)
         res.status(200).send(user)
     } catch (error) {
         res.status(400).send(error)
     }
-})
+}
 
-module.exports = router
+module.exports = { registerUser, getUserData, changeUserPassword, addViceToUser, getUserVices, updateVice, deleteVice }

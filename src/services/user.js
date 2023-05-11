@@ -109,4 +109,4 @@ async function deleteVice(userId, viceId) {
   return user
 }
 
-module.exports = { registerUser, changeUserPassword, addViceToUser, updateVice, deleteVice, getUserData, getUserVices }
+module.exports = { registerUser, getUserData, changeUserPassword, addViceToUser, getUserVices, updateVice, deleteVice }
