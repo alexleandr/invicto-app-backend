@@ -11,7 +11,7 @@ const router = Router()
 router.post('/', userController.registerUser)
 
 // Ler dados do usuário
-router.get('/:userId', verifyToken, userController.getUserData)
+router.get('/me', verifyToken, userController.getUserData)
 
 // Mudar senha do usuário
 router.patch('/:userId/password', verifyToken, userController.changeUserPassword)

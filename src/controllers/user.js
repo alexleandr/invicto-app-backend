@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+
 const userService = require('../services/user')
 
 // CONTROLLER USUÁRIO:
@@ -14,8 +16,14 @@ async function registerUser(req, res) {
 
 // Ler dados do usuário
 async function getUserData(req, res) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+
+    const decodedToken = jwt.decode(token)
+    const userId = decodedToken.id
+
     try {
-        const user = await userService.getUserData(req.params.userId)
+        const user = await userService.getUserData(userId)
         res.status(200).send(user)
     } catch (error) {
         res.status(400).send(error)
