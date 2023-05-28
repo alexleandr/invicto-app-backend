@@ -1,7 +1,9 @@
 const { Router } = require('express')
 
 const userController = require('../controllers/user')
+
 const { verifyToken } = require('../middlewares/verifyToken')
+const { verifyPassword } = require('../middlewares/verifyPassword')
 
 const router = Router()
 
@@ -14,7 +16,7 @@ router.post('/', userController.registerUser)
 router.get('/me', verifyToken, userController.getUserData)
 
 // Mudar senha do usuário
-router.patch('/:userId/password', verifyToken, userController.changeUserPassword)
+router.patch('/:userId/password', verifyToken, verifyPassword, userController.changeUserPassword)
 
 // ROTA VÍCIO:
 
