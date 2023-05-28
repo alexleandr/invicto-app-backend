@@ -33,7 +33,7 @@ async function getUserData(req, res) {
 // Mudar senha do usuário
 async function changeUserPassword(req, res) {
     try {
-        const user = await userService.changeUserPassword(req.params.userId, req.body.password)
+        const user = await userService.changeUserPassword(req.params.userId, req.body.newPassword)
         res.status(200).send(user)
     } catch (error) {
         res.status(400).send(error)
