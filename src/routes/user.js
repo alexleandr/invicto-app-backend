@@ -23,9 +23,6 @@ router.patch('/:userId/password', verifyToken, verifyPassword, userController.ch
 // Registrar vício
 router.post('/:userId/vices', verifyToken, userController.addViceToUser)
 
-// Ler vícios de um usuário
-router.get('/:userId/vices', verifyToken, userController.getUserVices)
-
 // Editar vício
 router.put('/:userId/vices/:viceId', verifyToken, userController.updateVice)
 

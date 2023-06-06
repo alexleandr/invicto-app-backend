@@ -52,16 +52,6 @@ async function addViceToUser(req, res) {
     }
 }
 
-// Ler vícios de um usuário
-async function getUserVices(req, res) {
-    try {
-        const user = await userService.getUserVices(req.params.userId)
-        res.status(200).send(user)
-    } catch (error) {
-        res.status(400).send(error)
-    }
-}
-
 // Editar vício
 async function updateVice(req, res) {
     try {
@@ -82,4 +72,4 @@ async function deleteVice(req, res) {
     }
 }
 
-module.exports = { registerUser, getUserData, changeUserPassword, addViceToUser, getUserVices, updateVice, deleteVice }
+module.exports = { registerUser, getUserData, changeUserPassword, addViceToUser, updateVice, deleteVice }

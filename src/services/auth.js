@@ -8,7 +8,7 @@ const secret = process.env.JWT_SECRET ?? ''
 
 // Gerar token
 function generateToken(user) {
-  const token = jwt.sign({ id: user._id, nickname: user.nickname }, secret, { expiresIn: '48h' })
+  const token = jwt.sign({ id: user._id, nickname: user.nickname }, secret, { expiresIn: '2h' })
   return token
 }
 
