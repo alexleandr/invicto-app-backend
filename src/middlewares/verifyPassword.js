@@ -12,11 +12,10 @@ async function verifyPassword(req, res, next) {
       throw new Error('User not found')
     }
   
-    bcrypt.compare(currentPassword, user.password, (err, result) => {
+    await bcrypt.compare(currentPassword, user.password, (err, result) => {
       if (err) {
         return res.status(500).json({ error: 'Internal Server Error' })
       }
-  
       if (!result) {
         return res.status(401).json({ error: 'Incorrect current password' })
       }
